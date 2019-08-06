@@ -24,7 +24,7 @@ function outer() {
   
 // Code Here
 
-
+var inner = outer()
 
 //Once you do that, invoke inner.
 
@@ -52,7 +52,7 @@ function callFriend(name) {
 */
 
 //Code Here
-
+var callJake = callFriend('Jake', '435-555-9248')
 
 
 ////////// PROBLEM 3 //////////
@@ -62,15 +62,20 @@ function callFriend(name) {
 */
 
 //Code Here
-
+function makeCounter () {
+  let startNum = 1
+  return function () {
+    return startNum ++
+  }
+}
 
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -89,7 +94,14 @@ function counterFactory(value) {
   // Code here.
 
   return {
-
+    inc: () => {
+      value ++
+      return value
+    },
+    dec:() => {
+      value --
+      return value
+    }
   };
 }
 
@@ -111,11 +123,13 @@ counter = counterFactory(10);
 
 function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
-
+  function message () {
+    return (`${welcomeText} ${firstname} ${lastname}.`)
+  }
   // code message function here.
 
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
 var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
@@ -143,10 +157,13 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
-    // Code here.
-  };
-})();
-
+    publicMethod () {
+      return privateMethod()
+    }
+  }
+  }) ()
+  module.publicMethod();
+  
 
 
 ////////// PROBLEM 7 //////////
@@ -162,7 +179,14 @@ function secretNumber() {
   var secret = 143;
 
   return {
-    // Code here
+    addToSecret: num => {
+      secret += num
+      return secret
+    },
+    takeAwayFromSecret: num => {
+      secret -= num
+      return secret
+    }
   };
 }
 
@@ -187,7 +211,7 @@ function secretNumber() {
 */
 
 function timeOutCounter() {
-  for (var i = 0; i <= 5; i++) {
+  for (let i = 0; i <= 5; i++) {
     setTimeout(function() {
       console.log(i);
     }, i * 1000);
